@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:infra="clr-namespace:MyOrders.Infrastructure;assembly=MyOrders"
+             x:Class="MyOrders.App">
+  <Application.Resources>
+    <ResourceDictionary>
+      <!--General Colors-->
+      <Color x:Key="MainColor">#ff3b77</Color>
+      <Color x:Key="FontColor">#52656b</Color>
+      <Color x:Key="AccentColor1">#cdff00</Color>
+      <Color x:Key="AccentColor2">#b8b89f</Color>
+      <Color x:Key="BackgroundColor">#f9f9f9</Color>
+      <!--Menu Colors-->
+      <Color x:Key="MenuColor">#52656b</Color>
+      <Color x:Key="MenuFontColor">#ffffff</Color>
+      <!--Locator-->
+      <infra:InstanceLocator x:Key="Locator"></infra:InstanceLocator>
+    </ResourceDictionary>
+  </Application.Resources>
+</Application>
