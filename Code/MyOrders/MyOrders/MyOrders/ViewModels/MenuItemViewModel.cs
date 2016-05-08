@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using MyOrders.Pages;
+using MyOrders.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,36 +12,22 @@ namespace MyOrders.ViewModels
 {
     public class MenuItemViewModel
     {
+        NavigationService navigationService;
+
+        public MenuItemViewModel()
+        {
+            navigationService = new NavigationService();
+        }
+
         public string Icon { get; set; }
         public string Title { get; set; }
         public string PageName { get; set; }
 
         public ICommand NavigateCommand
         {
-            get { return new RelayCommand(Navigate); }
+            get { return new RelayCommand(() => navigationService.Navigate(PageName)); }
         }
 
-        private void Navigate()
-        {
-            App.Master.IsPresented = false;
-            switch (PageName)
-            {
-                case "AlarmsPage":
-                    App.Navigator.PushAsync(new AlarmsPage());
-                    break;
-                case "ClientsPage":
-                    App.Navigator.PushAsync(new ClientsPage());
-                    break;
-                case "SettingsPage":
-                    App.Navigator.PushAsync(new SettingsPage());
-                    break;
-                case "MainPage":
-                    App.Navigator.PopToRootAsync();
-                    App.Navigator.PushAsync(new MainPage());
-                    break;
-                default:
-                    break;
-            }
-        }
+        
     }
 }

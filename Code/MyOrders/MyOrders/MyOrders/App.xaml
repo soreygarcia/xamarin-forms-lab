@@ -14,6 +14,57 @@
       <!--Menu Colors-->
       <Color x:Key="MenuColor">#52656b</Color>
       <Color x:Key="MenuFontColor">#ffffff</Color>
+
+      <!--Fonts-->
+      <OnPlatform x:Key="GeneralButtonFont"
+                  x:TypeArguments="Font"
+                  iOS="12"
+                  Android="14"
+                  WinPhone="16" />
+      
+      <!--Styles-->
+      <Style 
+        TargetType="Button">
+        <Setter Property="Font"
+                Value="{StaticResource GeneralButtonFont}"></Setter>
+        <Setter Property="BorderRadius"
+                Value="20"></Setter>
+        <Setter Property="HeightRequest"
+                Value="40"></Setter>
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource MainColor}"></Setter>
+        <Setter Property="TextColor"
+                Value="White"></Setter>
+      </Style>
+      <!--DataTemplates-->
+      <DataTemplate x:Key="OrderItemTemplate">
+        <ViewCell>
+          <Grid Padding="8">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"></ColumnDefinition>
+              <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image
+              WidthRequest="50" HeightRequest="50" VerticalOptions="Start"
+              Source="icon.png"></Image>
+            <StackLayout Grid.Column="1">
+              <Label
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}"
+                Text="{Binding Title}"></Label>
+              <Label
+                VerticalOptions="Center"
+                TextColor="{StaticResource FontColor}"
+                Text="{Binding Description}"></Label>
+              <Label
+                VerticalOptions="Center"
+                TextColor="{StaticResource MainColor}"
+                Text="{Binding DeliveryDate, StringFormat='{0:yyyy/MM/dd}'}"></Label>
+            </StackLayout>
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
       <!--Locator-->
       <infra:InstanceLocator x:Key="Locator"></infra:InstanceLocator>
     </ResourceDictionary>

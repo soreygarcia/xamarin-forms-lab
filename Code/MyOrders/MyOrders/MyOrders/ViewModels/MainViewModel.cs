@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using MyOrders.Pages;
+using MyOrders.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,13 +13,24 @@ namespace MyOrders.ViewModels
 {
     public class MainViewModel
     {
+        NavigationService navigationService;
+        ApiService apiService;
+
         public MainViewModel()
         {
+            navigationService = new NavigationService();
+            apiService = new ApiService();
+
+            Orders = new ObservableCollection<OrderViewModel>();
+
             LoadMenu();
-            LoadData();
+            //LoadData();
         }
 
         #region Properties
+
+        public OrderViewModel NewOrder { get; private set; }
+
         public ObservableCollection<OrderViewModel> Orders { get; set; }
 
         public ObservableCollection<MenuItemViewModel> Menu { get; set; }
@@ -35,11 +47,36 @@ namespace MyOrders.ViewModels
             switch (pageName)
             {
                 case "NewOrderPage":
-                    App.Navigator.PushAsync(new NewOrderPage());
+                    NewOrder = new OrderViewModel();
                     break;
                 default:
                     break;
             }
+            navigationService.Navigate(pageName);
+        }
+
+        public ICommand StartCommand
+        {
+            get { return new RelayCommand(Start); }
+        }
+
+
+        private async void Start()
+        {
+            var list = await apiService.GetAllOrders();
+            Orders.Clear();
+
+            foreach (var item in list)
+            {
+                Orders.Add(new OrderViewModel()
+                {
+                    Title = item.Title,
+                    DeliveryDate = item.DeliveryDate,
+                    Description = item.Description
+                });
+            }
+
+            navigationService.SetMainPage("MasterPage");
         }
 
         #endregion

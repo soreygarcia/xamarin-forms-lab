@@ -5,25 +5,38 @@
              BackgroundColor="{StaticResource BackgroundColor}"
              Title="Nuevo Pedido"
              BindingContext="{Binding Main, Source={StaticResource Locator}}">
-  <ScrollView>
+  <ScrollView BindingContext="{Binding NewOrder}">
     <StackLayout Padding="8">
       <Label TextColor="{StaticResource FontColor}" 
              Text="Título"></Label>
       <Entry TextColor="{StaticResource FontColor}"
+             Text="{Binding Title, Mode=TwoWay}"
+             BackgroundColor="White"></Entry>
+      <Label TextColor="{StaticResource FontColor}"
+             Text="Cliente"></Label>
+      <Entry TextColor="{StaticResource FontColor}"
+             Text="{Binding Client, Mode=TwoWay}"
              BackgroundColor="White"></Entry>
       <Label TextColor="{StaticResource FontColor}" 
              Text="Descripción"></Label>
       <Editor TextColor="{StaticResource FontColor}"
+              HeightRequest="100"
+              Text="{Binding Description, Mode=TwoWay}"
+              BackgroundColor="White"></Editor>
+      <Label TextColor="{StaticResource FontColor}"
+             Text="Datos de envío"></Label>
+      <Editor TextColor="{StaticResource FontColor}"
+              Text="{Binding DeliveryInformation, Mode=TwoWay}"
+              HeightRequest="100"
               BackgroundColor="White"></Editor>
       <Label TextColor="{StaticResource FontColor}" 
              Text="Fecha Entrega"></Label>
       <DatePicker
-        BackgroundColor="White"></DatePicker>
-      <Button 
-        HeightRequest="50"
-        BorderRadius="25"
-        BackgroundColor="{StaticResource MainColor}"
-        TextColor="{StaticResource MenuFontColor}" 
+        BackgroundColor="White"
+        Date="{Binding DeliveryDate, Mode=TwoWay}">
+        <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+      </DatePicker>
+      <Button Command="{Binding SaveCommand}"
         Text="Guardar"></Button>
     </StackLayout>
   </ScrollView>
